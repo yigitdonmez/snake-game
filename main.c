@@ -97,59 +97,44 @@ void hide_cursor() {
 }
 
 void update_display(List *snake, Food *food, int score){
-// 1. Frame Buffer (2D Dizi) Oluştur
     char board[HEIGHT][WIDTH];
 
-    // 2. Buffer'ı Boşlukla Doldur
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             board[i][j] = ' ';
         }
     }
 
-    // 3. Yemi Buffer'a Çiz
     board[food->y][food->x] = 'F';
 
-    // 4. Yılanı Buffer'a Çiz
     SnakeSegment *current = snake->head;
     if (current != NULL) {
-        // Başı 'O' ile çiz
         board[current->y][current->x] = 'O';
         current = current->next;
     }
     while (current != NULL) {
-        // Gövdeyi '*' ile çiz
         board[current->y][current->x] = '*';
         current = current->next;
     }
 
-    // 5. Ekrana Çizdirmeye Başla
-    
-    // İmleci (0, 0)'a götür (system("cls") yerine bu daha az titrer)
     gotoxy(0, 0); 
 
-    // Çizim
-    // Üst duvar
     for (int i = 0; i < WIDTH + 2; i++) printf("#");
     printf("\n");
 
-    // Oyun alanı (buffer'ı kullanarak)
     for (int i = 0; i < HEIGHT; i++) {
-        printf("#"); // Sol duvar
+        printf("#");
         for (int j = 0; j < WIDTH; j++) {
             printf("%c", board[i][j]);
         }
-        printf("#\n"); // Sağ duvar
+        printf("#\n");
     }
 
-    // Alt duvar
     for (int i = 0; i < WIDTH + 2; i++) printf("#");
     printf("\n");
 
     printf("                 YOUR SCORE: %d\n", score);
 
-    // (İsterseniz skoru buraya yazdırın)
-    // printf("Skor: %d\n", ...)
 }
 
 int main(){
