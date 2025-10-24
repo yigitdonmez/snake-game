@@ -186,7 +186,7 @@ int main(){
         update_snake(snake, food);
         score = snake->snake_lenght * 10;
         update_display(snake, food, score);
-        Sleep(100);
+        Sleep(70);
     }
     delete_list(snake);
     free(food);
